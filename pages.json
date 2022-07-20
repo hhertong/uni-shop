@@ -3,35 +3,62 @@
 		{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "",
+				
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/cate/cate",
 			"style": {
-				"navigationBarTitleText": "",
+			
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/cart/cart",
 			"style": {
-				"navigationBarTitleText": "",
+			
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "",
+				
 				"enablePullDownRefresh": false
 			}
 
 		}
 	],
+	
+	"subPackages": [
+		{
+			"root": "subpkg",
+			"pages": [
+				
+			{
+                    "path" : "goods_detail/goods_detail",
+                    "style" :                                                                                    
+                {
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{
+                    "path" : "goods_list/goods_list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+		}
+	],
+	
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "欢欢优选",
 		"navigationBarBackgroundColor": "#55ffff",
 		"backgroundColor": "#FFFFFF"
