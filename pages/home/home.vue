@@ -1,6 +1,9 @@
 <template>
 
 	<view>
+		<view class="search-box">
+			<my-search @click="gotoSearch"></my-search>
+		</view>
 		<swiper :indicator-dots="true" :autoplay="true" :interval="2000" :duration="1000" :circular="true">
 			<swiper-item v-for="(item,i) in swiperList" :key="i">
 				<navigator class="swiper-item" :url="'/subpkg/goods_detail/goods_detail?goods_id='+item.goods_id">
@@ -30,8 +33,9 @@
 					</navigator> <!-- 右侧 4 个小图片的盒子 -->
 					<view class="right-img-box">
 						<navigator class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2"
-							 :url="item2.url">
-							<image :src="item2.image_src" mode="widthFix" :style="{width: item2.image_width + 'rpx'}" v-if="i2 !== 0">
+							:url="item2.url">
+							<image :src="item2.image_src" mode="widthFix" :style="{width: item2.image_width + 'rpx'}"
+								v-if="i2 !== 0">
 							</image>
 						</navigator>
 					</view>
@@ -103,6 +107,12 @@
 				})
 
 				this.floorList = res.message
+			},
+
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
 			}
 
 
@@ -150,5 +160,12 @@
 	.floor-img-box {
 		display: flex;
 		padding-left: 10rpx;
+	}
+
+	
+	.search-box {
+		position: sticky;
+		top: 0;
+		z-index: 999;
 	}
 </style>
