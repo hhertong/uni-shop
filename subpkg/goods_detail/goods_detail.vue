@@ -17,7 +17,7 @@
 					<uni-icons type="star" size="18" color="gray"></uni-icons> <text>收藏</text>
 				</view>
 			</view> <!-- 运费 -->
-			<view class="yf">快递：免运费</view>
+			<view class="yf">快递：免运费 </view>
 		</view>
 		<!-- 商品详情信息 -->
 		<rich-text :nodes="goods_info.goods_introduce"></rich-text>
@@ -35,7 +35,28 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex'
 	export default {
+		watch: {
+			total: {
+				handler(newVal) {
+					const findResult = this.options.find((x) => x.text === '购物车')
+					if (findResult) {
+						findResult.info = newVal
+					}
+				},
+				immediate: true
+			}
+
+		},
+		computed: {
+			...mapState('m_cart', []),
+			...mapGetters('m_cart', ['total']),
+		},
 		data() {
 			return {
 				goods_info: {},
@@ -48,7 +69,7 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 2
+					info: 0
 				}], // 右侧按钮组的配置对象 
 				buttonGroup: [{
 					text: '加入购物车',
@@ -91,10 +112,26 @@
 						url: '/pages/cart/cart'
 					})
 				}
+			},
+			...mapMutations('m_cart', ['addToCart']),
+
+			buttonClick(e) {
+				if (e.content.text ===
+					'加入购物车') { // 2. 组织一个商品的信息对象 
+					const goods = {
+						goods_id: this.goods_info.goods_id, // 商品的Id 
+						goods_name: this.goods_info.goods_name, // 商品的名称 
+						goods_price: this.goods_info.goods_price, // 商品的价格 
+						goods_count: 1, // 商品的数量 
+						goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片 
+						goods_state: true, // 商品的勾选状态
+					}
+					// 3. 通过 this 调用映射过来的 addToCart 方法，把商品信息对象存储到购物车中 
+					this.addToCart(goods)
+				}
 			}
-
-
 		},
+
 
 	}
 </script>
